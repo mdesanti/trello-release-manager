@@ -106,6 +106,7 @@ load "home#index", (controller, action) ->
 
   displayLists = (data) ->
     $('#boards-list').empty()
+    console.log data
     $.each(data, (index, value) ->
       Trello.get('/lists/' + value.id,
         (data) ->
