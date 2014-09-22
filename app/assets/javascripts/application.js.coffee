@@ -37,8 +37,14 @@ load "home#index", (controller, action) ->
   onAuthorizeSuccessful = ->
     token = Trello.token()
 
-  displayListTitle = (list) ->
-    $('#list-name').append('<h1>' + list.name + '</h1>')
+  displayListTitle = (list_id) ->
+    Trello.get('/lists/' + list_id,
+      (data) ->
+        $('#list-name').append('<h1>' + data.name + '</h1>')
+      (data) ->
+        console.log data
+    )
+
 
   enableDeleteCard = ->
     delete_crosses = $('.delete-card')
@@ -48,26 +54,9 @@ load "home#index", (controller, action) ->
       )
     )
 
-  searchForLatestList = (data) ->
-    latest = undefined
-    latest_list = undefined
-    $.each(data, (index, value) ->
-      if value.name.toLowerCase().indexOf('production') >= 0
-        date = new Date(value.name.split(" ")[1])
-        if latest == undefined || latest.getTime() > date.getTime()
-          latest = date
-          latest_list = value
-    )
+  searchForLatestList = (list_id) ->
     displayListTitle(latest_list)
     getCardsForList(latest_list.id)
-
-  getLatestList = (board_id) ->
-    Trello.get('/boards/' + board_id + '/lists',
-      (data) ->
-        searchForLatestList(data)
-      (data) ->
-        console.log 'Failure :('
-    )
 
   buildCardHtml = (card, index) ->
     '<input type="hidden" name="trello_release[trello_cards_attributes][][card_number]" value="' + card.idShort + '">
@@ -97,6 +86,7 @@ load "home#index", (controller, action) ->
   getCardsForList = (list_id) ->
     Trello.get('/lists/' + list_id + '/cards',
       (data) ->
+        displayListTitle(list_id)
         showCards(data)
       (data) ->
         console.log 'Failure :('
@@ -105,10 +95,39 @@ load "home#index", (controller, action) ->
   showBoard = (data) ->
     $('#boards-list').append('<a href="#" data-board_id="' + data.id + '" class="list-group-item">' + data.name + '</a>')
 
+  displayList = (data) ->
+    $('#boards-list').append('<a href="#" data-list_id="' + data.id + '" class="list-group-item">' + data.name + '</a>')
+
+  setOnClickList = (list_id) ->
+    $('#boards-list :last-child').click( ->
+      $('#boards-list').css('hidden')
+      getCardsForList(list_id)
+    )
+
+  displayLists = (data) ->
+    $('#boards-list').empty()
+    $.each(data, (index, value) ->
+      Trello.get('/lists/' + value.id,
+        (data) ->
+          displayList(data)
+          setOnClickList(data.id)
+        (data) ->
+          console.log data
+      )
+    )
+
+  getBoardLists = (board_id) ->
+    Trello.get('/boards/' + board_id + '/lists',
+      (data) ->
+        displayLists(data)
+      (data) ->
+        console.log data
+    )
+
   setOnClick = (board_id) ->
     $('#boards-list :last-child').click( ->
       $('#boards-list').css('hidden')
-      getLatestList(board_id)
+      getBoardLists(board_id)
     )
 
   listBoards = (data) ->
