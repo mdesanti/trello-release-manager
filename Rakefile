@@ -4,7 +4,7 @@
 # require 'resque/tasks'
 require File.expand_path('../config/application', __FILE__)
 
-RailsBootstrap::Application.load_tasks
+Trellorelease::Application.load_tasks
 
 # task 'resque:setup' => :environment
 

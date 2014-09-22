@@ -1,0 +1,13 @@
+html
+  head
+    title Trello-release
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  body data-controller="#{controller.controller_path}" data-action="#{controller.action_name}"
+    .container-fluid
+      .row#title-bar
+        .col-md-12.text-center
+          h1
+            = "Release Manager"
+      = yield

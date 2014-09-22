@@ -1,0 +1,38 @@
+#title-bar {
+  background-color: #2A79A6;
+  margin-bottom: 20px;
+
+  h1 {
+    color: white;
+  }
+}
+
+#save-button {
+  height: 45px;
+
+  input {
+    margin-right: 15px;
+    float: right;
+  }
+}
+
+#cards-row {
+  margin-left: 20px;
+
+  .delete-card {
+    float: right;
+  }
+
+  #cards {
+    .card {
+      min-height: 140px;
+    }
+    .panel {
+      .panel-heading {
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+}

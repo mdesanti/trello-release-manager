@@ -17,10 +17,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: rails-bootstrap_development
+  database: trellorelease_development
   pool: 5
-  username: rails-bootstrap
-  password: rails-bootstrap
+  username: trellorelease
+  password: trellorelease
   host: localhost
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -47,28 +47,28 @@ development:
 test: &test
   adapter: postgresql
   encoding: unicode
-  database: rails-bootstrap_test
+  database: trellorelease_test
   pool: 5
-  username: rails-bootstrap
-  password: rails-bootstrap
+  username: trellorelease
+  password: trellorelease
   host: localhost
 
 staging:
   adapter: postgresql
   encoding: unicode
-  database: rails-bootstrap_staging
+  database: trellorelease_staging
   pool: 5
-  username: rails-bootstrap
-  password: rails-bootstrap
+  username: trellorelease
+  password: trellorelease
   host: localhost
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: rails-bootstrap_production
+  database: trellorelease_production
   pool: 5
-  username: rails-bootstrap
-  password: rails-bootstrap
+  username: trellorelease
+  password: trellorelease
   host: localhost
 
 cucumber:
