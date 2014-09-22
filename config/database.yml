@@ -67,8 +67,8 @@ production:
   encoding: unicode
   database: trellorelease_production
   pool: 5
-  username: trellorelease
-  password: trellorelease
+  username: yieuoupzxcslei
+  password: wow5BdjvAhOAFwnRFtGIPYm6b5
   host: localhost
 
 cucumber:
