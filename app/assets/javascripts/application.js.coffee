@@ -24,7 +24,7 @@ load "home#index", (controller, action) ->
   authenticateTrello = ->
     Trello.authorize({
       name: "Trello Release",
-      type: "popup",
+      type: "redirect",
       interactive: true,
       expiration: "never",
       persist: true,
