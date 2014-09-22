@@ -96,22 +96,22 @@ load "home#index", (controller, action) ->
     $('#boards-list').append('<a href="#" data-board_id="' + data.id + '" class="list-group-item">' + data.name + '</a>')
 
   displayList = (data) ->
-    $('#boards-list').append('<a href="#" data-list_id="' + data.id + '" class="list-group-item">' + data.name + '</a>')
+    to_append = $('<a href="#" data-list_id="' + data.id + '" class="list-group-item">' + data.name + '</a>')
+    $('#boards-list').append(to_append)
+    to_append
 
-  setOnClickList = (list_id) ->
-    $('#boards-list :last-child').click( ->
+  setOnClickList = (list_id, html_elem) ->
+    $(html_elem).click( ->
       $('#boards-list').css('hidden')
       getCardsForList(list_id)
     )
 
   displayLists = (data) ->
     $('#boards-list').empty()
-    console.log data
     $.each(data, (index, value) ->
       Trello.get('/lists/' + value.id,
         (data) ->
-          displayList(data)
-          setOnClickList(data.id)
+          setOnClickList(data.id, displayList(data))
         (data) ->
           console.log 'Failure'
       )
