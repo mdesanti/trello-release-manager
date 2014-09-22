@@ -42,7 +42,7 @@ load "home#index", (controller, action) ->
       (data) ->
         $('#list-name').append('<h1>' + data.name + '</h1>')
       (data) ->
-        console.log data
+        console.log 'Failure'
     )
 
 
@@ -112,7 +112,7 @@ load "home#index", (controller, action) ->
           displayList(data)
           setOnClickList(data.id)
         (data) ->
-          console.log data
+          console.log 'Failure'
       )
     )
 
@@ -121,7 +121,7 @@ load "home#index", (controller, action) ->
       (data) ->
         displayLists(data)
       (data) ->
-        console.log data
+        console.log 'Failure'
     )
 
   setOnClick = (board_id) ->
@@ -137,7 +137,7 @@ load "home#index", (controller, action) ->
           showBoard(data)
           setOnClick(data.id)
         (data) ->
-          console.log data
+          console.log 'Failure'
       )
     )
 
@@ -147,7 +147,7 @@ load "home#index", (controller, action) ->
       (data) ->
         listBoards(data)
       (data) ->
-        console.log data
+        console.log 'Failure'
     )
 
 
