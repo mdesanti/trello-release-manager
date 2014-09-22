@@ -1,6 +1,7 @@
 class EmailsController < ApplicationController
 
   def send_email
-    puts params
+    Mailer.notify_release(params).deliver
+    redirect_to root_url
   end
 end

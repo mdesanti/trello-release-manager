@@ -34,3 +34,5 @@ coverage/*
 
 # Images
 public/uploads
+
+.mandrill.yml

@@ -1,0 +1,9 @@
+p
+  = simple_format @body
+ul
+  - @trello_release.trello_cards.each do |card|
+    li
+      a href=card.card_link
+        = card.card_number
+      = " - "
+      span= card.card_name

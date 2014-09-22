@@ -1,6 +1,7 @@
 .container
   .row
     = form_tag email_send_path do |f|
+      = hidden_field_tag :trello_release, @trello_release.id
       .col-md-8
         .row
           .col-md-8
@@ -17,6 +18,13 @@
               = email_field_tag 'to[]', '', class: 'form-control', placeholder: 'to', required: true
           .col-md-2
             span.glyphicon.glyphicon-plus#add-email
+        br
+        .row
+          .col-md-8#to
+            .input-group
+              span.input-group-addon
+                = "S"
+              = text_field_tag 'subject', '', class: 'form-control', placeholder: 'subject', required: true
         br
         .row
           .col-md-8
