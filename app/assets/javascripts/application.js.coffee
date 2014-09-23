@@ -12,8 +12,11 @@
 # //
 # //= require jquery
 # //= require jquery_ujs
-# //= require turbolinks
 # //= require twitter/bootstrap
+# //= require angular
+# //= require angular-route
+# //= require angular-rails-templates
+# //= require_tree ../templates
 # //= require loadjs
 # //= require_tree .
 
@@ -152,6 +155,6 @@ load "home#index", (controller, action) ->
     )
 
 
-  authenticateTrello()
-  getAndListBoards()
+  #authenticateTrello()
+  #getAndListBoards()
 

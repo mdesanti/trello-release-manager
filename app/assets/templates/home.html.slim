@@ -1,0 +1,6 @@
+div ng-controller="BoardsCtrl"
+  .row
+    ul.list-group.col-md-4
+      a href="#" class="list-group-item" ng-repeat="board in boards" ng-click="loadLists(board)" {{board.name}}
+    ul.list-group.col-md-4
+      a href="#" class="list-group-item" ng-repeat="list in lists" {{list.name}}

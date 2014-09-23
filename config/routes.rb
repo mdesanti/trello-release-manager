@@ -9,6 +9,8 @@ Trellorelease::Application.routes.draw do
 
   post "send_email" => "emails#send_email", as: 'email_send'
 
+  get '*path' => 'home#index'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
