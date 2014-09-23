@@ -20,7 +20,6 @@ angular.module('TrelloRelease')
       (data) ->
         console.log('Failure');
     )
-    $scope.things = ['Angular', 'Rails 4.1', 'Working', 'Together!!'];
 
     $scope.loadLists = (board) ->
       Trello.get('/boards/' + board.id + '/lists',
