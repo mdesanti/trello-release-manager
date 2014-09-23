@@ -1,0 +1,43 @@
+div ng-controller="ReleaseCtrl"
+  .container
+    .row
+      form#form accept-charset="UTF-8" ng-submit="submit()" name="form"
+        input ng-model="info.trello_release" class="ng-hide" type="text"
+        .col-md-8
+          .row
+            .col-md-8
+              .input-group
+                span.input-group-addon
+                  = "@"
+                input#from.form-control ng-model="info.from" name="from" placeholder="from" required="required" type="email"
+          br
+          .row
+            .col-md-8#to
+              .input-group
+                span.input-group-addon
+                  = "@"
+                input#from.form-control ng-repeat="t in info.to track by $index" ng-model="info.to[$index]" placeholder="to" required="required" type="email"
+            .col-md-2
+              span.glyphicon.glyphicon-plus#add-email ng-click="addNewEmail()"
+          br
+          .row
+            .col-md-8#to
+              .input-group
+                span.input-group-addon
+                  = "S"
+                input#subject.form-control ng-model="info.subject" placeholder="subject" required="required" type="text"
+
+          br
+          .row
+            .col-md-8
+              .form-group
+                textarea#intro.form-control ng-model="info.intro"
+          .row
+            ul
+              li ng-repeat="card in release.trello_cards"
+                a href="{{card.card_link}}" target="_blank"
+                  = "{{card.card_number}}"
+                = " - "
+                span= "{{card.card_name}}"
+        .col-md-4
+          input.btn.btn-success name="commit" type="submit" value=("Send email")

@@ -1,13 +1,1 @@
 div ng-view=""
-ul.list-group.col-md-4#boards-list
-
-= form_tag trello_releases_path, {class: 'hidden', id: 'form'} do |f|
-  .row#cards-row
-    .col-md-12#release-date
-      = hidden_field :trello_release, :release_date, value: Time.current
-    .col-md-12#list-name
-    .col-md-12#save-button
-      = submit_tag 'Save and send email', class: "btn btn-success"
-    .col-md-12#cards
-
-
