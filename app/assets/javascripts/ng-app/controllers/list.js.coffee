@@ -1,5 +1,5 @@
 angular.module('TrelloRelease')
-  .controller('ListCtrl', ($scope, $routeParams, $location, TrelloService, ReleaseService) ->
+  .controller('ListCtrl', ['$scope', '$routeParams', '$location', 'TrelloService', 'ReleaseService', ($scope, $routeParams, $location, TrelloService, ReleaseService) ->
     $scope.cards = [];
 
     $scope.$on('list.cards.update', (event) ->
@@ -25,4 +25,4 @@ angular.module('TrelloRelease')
         () ->
           console.log 'Fail'
       )
-  );
+  ]);

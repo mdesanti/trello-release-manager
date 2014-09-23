@@ -3,7 +3,7 @@ angular
         'ngRoute',
         'templates',
         'restangular'
-    ]).config(($routeProvider, $locationProvider, RestangularProvider) ->
+    ]).config(['$routeProvider', '$locationProvider', 'RestangularProvider',($routeProvider, $locationProvider, RestangularProvider) ->
         RestangularProvider.setBaseUrl('/');
         $routeProvider
           .when('/', {
@@ -16,4 +16,4 @@ angular
             templateUrl: 'release.html'
           });
         $locationProvider.html5Mode(true);
-    );
+    ]);

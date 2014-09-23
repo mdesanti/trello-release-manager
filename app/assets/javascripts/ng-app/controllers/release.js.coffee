@@ -1,5 +1,5 @@
 angular.module('TrelloRelease')
-  .controller('ReleaseCtrl', ($scope, $routeParams, $location, ReleaseService) ->
+  .controller('ReleaseCtrl', ['$scope', '$routeParams', '$location', 'ReleaseService', ($scope, $routeParams, $location, ReleaseService) ->
 
     $scope.info = {to: [""]}
 
@@ -16,4 +16,4 @@ angular.module('TrelloRelease')
     $scope.addNewEmail = () ->
       $scope.info.to.push("")
 
-  );
+  ]);

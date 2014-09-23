@@ -1,5 +1,5 @@
 angular.module('TrelloRelease')
-  .controller('BoardsCtrl', ($scope, TrelloService) ->
+  .controller('BoardsCtrl', ['$scope', 'TrelloService', ($scope, TrelloService) ->
     $scope.boards = [];
 
     # login with Trello
@@ -17,4 +17,4 @@ angular.module('TrelloRelease')
         $scope.$apply()
       )
       TrelloService.getLists(board)
-  );
+  ]);
