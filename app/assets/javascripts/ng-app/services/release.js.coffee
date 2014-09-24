@@ -1,11 +1,9 @@
 angular.module('TrelloRelease').service( 'ReleaseService', [ '$rootScope', 'Restangular', ($rootScope, Restangular) ->
   service = {
     release: '',
-    newRelease: (cards) ->
-      data = {trello_release: {release_date: new Date(), trello_cards_attributes: ''} }
-      data['trello_release']['trello_cards_attributes'] = serializeCards(cards)
+    newRelease: (release) ->
       base = Restangular.all('trello_releases.json')
-      base.post(data).then(
+      base.post({trello_release: release}).then(
         (response) ->
           return response.id
         () ->

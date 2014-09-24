@@ -6,6 +6,11 @@ Trellorelease::Application.routes.draw do
   root 'home#index'
 
   resources :trello_releases, only: [:create, :show]
+  resources :trello_releases do
+    member do
+      get :find
+    end
+  end
 
   post "send_email" => "emails#send_email", as: 'email_send'
 

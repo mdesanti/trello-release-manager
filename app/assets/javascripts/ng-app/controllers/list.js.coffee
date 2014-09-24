@@ -1,9 +1,13 @@
 angular.module('TrelloRelease')
   .controller('ListCtrl', ['$scope', '$routeParams', '$location', 'TrelloService', 'ReleaseService', ($scope, $routeParams, $location, TrelloService, ReleaseService) ->
-    $scope.cards = [];
+    $scope.trello_release = {
+      release_date: new Date(),
+      board: TrelloService.selectedBoard.id,
+      trello_cards_attributes: []
+    }
 
     $scope.$on('list.cards.update', (event) ->
-      $scope.cards = TrelloService.cards
+      addCards(TrelloService.cards)
       $scope.$apply()
     )
     TrelloService.getCards($routeParams.listId)
@@ -15,14 +19,19 @@ angular.module('TrelloRelease')
     TrelloService.getList($routeParams.listId)
 
     $scope.removeCard = (card) ->
-      index = $scope.cards.indexOf(card)
-      $scope.cards.splice(index, 1);
+      index = $scope.trello_release.trello_cards_attributes.indexOf(card)
+      $scope.trello_release.trello_cards_attributes.splice(index, 1);
 
     $scope.submitRelease = () ->
-      ReleaseService.newRelease($scope.cards).then(
+      ReleaseService.newRelease($scope.trello_release).then(
         (id) ->
           $location.path('/release/' + id)
         () ->
           console.log 'Fail'
+      )
+
+    addCards = (cards) ->
+      angular.forEach(cards, (card, index) ->
+        $scope.trello_release.trello_cards_attributes.push({card_number: card.idShort, card_link: card.url, card_name: card.name})
       )
   ]);

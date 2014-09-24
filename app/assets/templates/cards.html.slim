@@ -7,15 +7,15 @@ div ng-controller="ListCtrl"
         button.btn.btn-success name="commit" type="submit"
           =("Save and send email")
       .col-md-12#cards
-        .col-md-4.card ng-repeat="card in cards track by $id(card)"
-          input name="trello_release[trello_cards_attributes][][card_number]" type="hidden" value="{{card.idShort}}"
-          input name="trello_release[trello_cards_attributes][][card_name]" type="hidden" value="{{card.name}}"
-          input name="trello_release[trello_cards_attributes][][card_link]" type="hidden" value="{{card.url}}"
+        .col-md-4.card ng-repeat="card in trello_release.trello_cards_attributes"
+          input type="hidden" value="{{card.card_number}}"
+          input type="hidden" value="{{card.card_name}}"
+          input type="hidden" value="{{card.card_link}}"
           .panel.panel-primary.panel-title
             .panel-heading
               a.glyphicon.glyphicon-remove.delete-card ng-click="removeCard(card)"
-              a href="{{card.url}}" target="_blank"
-                h3.panel-title= "# {{card.idShort}}"
+              a href="{{card.card_link}}" target="_blank"
+                h3.panel-title= "# {{card.card_number}}"
             .panel-body
-              p.list-group-item-text = "{{card.name}}"
+              p.list-group-item-text = "{{card.card_name}}"
 
