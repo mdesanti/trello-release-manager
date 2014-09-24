@@ -22,13 +22,5 @@ angular.module('TrelloRelease').service( 'ReleaseService', [ '$rootScope', 'Rest
       base = Restangular.all('send_email.json')
       base.post(info)
   }
-
-  serializeCards = (cards) ->
-    serialized = []
-    angular.forEach(cards, (card, index) ->
-      serialized.push({card_number: card.idShort, card_link: card.url, card_name: card.name} ) ;
-    )
-    return serialized
-
   return service;
 ]) ;

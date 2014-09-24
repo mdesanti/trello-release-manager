@@ -8,9 +8,6 @@ div ng-controller="ListCtrl"
           =("Save and send email")
       .col-md-12#cards
         .col-md-4.card ng-repeat="card in trello_release.trello_cards_attributes"
-          input type="hidden" value="{{card.card_number}}"
-          input type="hidden" value="{{card.card_name}}"
-          input type="hidden" value="{{card.card_link}}"
           .panel.panel-primary.panel-title
             .panel-heading
               a.glyphicon.glyphicon-remove.delete-card ng-click="removeCard(card)"
