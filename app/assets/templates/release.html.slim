@@ -3,16 +3,16 @@ div ng-controller="ReleaseCtrl"
     .row
       form#form accept-charset="UTF-8" ng-submit="submit()" name="form"
         input ng-model="info.trello_release" class="ng-hide" type="text"
-        .col-md-8
+        .col-md-6
           .row
-            .col-md-8
+            .col-md-10
               .input-group
                 span.input-group-addon
                   = "@"
                 input#from.form-control ng-model="info.from" name="from" placeholder="from" required="required" type="email"
           br
           .row
-            .col-md-8#to
+            .col-md-10#to
               .input-group
                 span.input-group-addon
                   = "@"
@@ -21,7 +21,7 @@ div ng-controller="ReleaseCtrl"
               span.glyphicon.glyphicon-plus#add-email ng-click="addNewEmail()"
           br
           .row
-            .col-md-8#to
+            .col-md-10#to
               .input-group
                 span.input-group-addon
                   = "S"
@@ -29,7 +29,7 @@ div ng-controller="ReleaseCtrl"
 
           br
           .row
-            .col-md-8
+            .col-md-10
               .form-group
                 textarea#intro.form-control ng-model="info.intro"
           .row
@@ -39,5 +39,15 @@ div ng-controller="ReleaseCtrl"
                   = "{{card.card_number}}"
                 = " - "
                 span= "{{card.card_name}}"
-        .col-md-4
+        .col-md-6
+          h3 = "Email preview"
+          .well
+            p ng-bind-html="info.intro|simpleFormat"
+            ul
+              li ng-repeat="card in release.trello_cards"
+                a href="{{card.card_link}}" target="_blank"
+                  = "{{card.card_number}}"
+                = " - "
+                span= "{{card.card_name}}"
+
           input.btn.btn-success name="commit" type="submit" value=("Send email")

@@ -1,0 +1,10 @@
+div ng-controller="HomeCtrl"
+  .row#chose.text-center
+    .col-md-12
+      h1 = "{{selectedBoard.name}}"
+    .col-md-6#left
+      a href="#"
+        h1 = "View releases"
+    .col-md-6#right
+      a href="/board/{{selectedBoard.id}}/selectList"
+        h1 = "Create new release"

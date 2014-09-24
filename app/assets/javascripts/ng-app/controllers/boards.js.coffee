@@ -1,5 +1,5 @@
 angular.module('TrelloRelease')
-  .controller('BoardsCtrl', ['$scope', 'TrelloService', ($scope, TrelloService) ->
+  .controller('BoardsCtrl', ['$scope', '$location', 'TrelloService', ($scope, $location, TrelloService) ->
     $scope.boards = [];
 
     # login with Trello
@@ -11,10 +11,7 @@ angular.module('TrelloRelease')
     )
     TrelloService.getBoards()
 
-    $scope.loadLists = (board) ->
-      $scope.$on('lists.update', (event) ->
-        $scope.lists = TrelloService.lists
-        $scope.$apply()
-      )
-      TrelloService.getLists(board)
+    $scope.selectBoard = (board) ->
+      TrelloService.selectedBoard = board
+      $location.path('/choose')
   ]);

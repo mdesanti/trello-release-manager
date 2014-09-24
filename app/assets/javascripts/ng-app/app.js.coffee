@@ -2,18 +2,26 @@ angular
     .module('TrelloRelease', [
         'ngRoute',
         'templates',
-        'restangular'
+        'restangular',
+        'ngSanitize',
+        'simpleFormat'
     ]).config(['$routeProvider', '$locationProvider', 'RestangularProvider',($routeProvider, $locationProvider, RestangularProvider) ->
         RestangularProvider.setBaseUrl('/');
         $routeProvider
           .when('/', {
             templateUrl: 'home.html'
           })
-          .when('/lists/:listId', {
-            templateUrl: 'list.html'
+          .when('/lists/:listId/cards', {
+            templateUrl: 'cards.html'
           })
           .when('/release/:releaseId', {
             templateUrl: 'release.html'
+          })
+          .when('/choose', {
+            templateUrl: 'choose.html'
+          })
+          .when('/board/:boardId/selectList', {
+            templateUrl: 'new_release.html'
           });
         $locationProvider.html5Mode(true);
     ]);

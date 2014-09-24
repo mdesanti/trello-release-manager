@@ -1,0 +1,6 @@
+div ng-controller="NewReleaseCtrl"
+  .row.text-center
+    .col-md-4.col-md-offset-4
+      h3 = "Lists"
+      ul.list-group
+        a class="list-group-item" ng-repeat="list in lists track by $id(list)" href="/lists/{{list.id}}/cards" {{list.name}}

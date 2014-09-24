@@ -4,6 +4,7 @@ angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', ($root
     lists: [],
     cards: [],
     token: '',
+    selectedBoard: undefined,
     list: undefined,
     getBoards: () ->
       service.boards = []

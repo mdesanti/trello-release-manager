@@ -7,6 +7,19 @@
   }
 }
 
+#chose {
+  #left {
+    border-right: 2px solid #2A79A6;
+  }
+
+  #left, #right {
+    h1 {
+      line-height: 300px;
+    }
+    min-height: 300px;
+  }
+}
+
 #save-button {
   height: 45px;
 
