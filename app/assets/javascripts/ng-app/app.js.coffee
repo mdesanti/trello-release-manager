@@ -9,6 +9,10 @@ angular
         RestangularProvider.setBaseUrl('/');
         $routeProvider
           .when('/', {
+            controller: 'LoginCtrl',
+            templateUrl: 'login.html'
+          })
+          .when('/boards', {
             templateUrl: 'home.html'
           })
           .when('/lists/:listId/cards', {

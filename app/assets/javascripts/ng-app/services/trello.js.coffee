@@ -1,4 +1,4 @@
-angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', ($rootScope) ->
+angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', '$location', ($rootScope, $location) ->
   service = {
     boards: [],
     lists: [],
@@ -16,17 +16,16 @@ angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', ($root
           console.log('Failure');
       )
     authorize: () ->
-      Trello.authorize({
-        name: "Trello Release",
-        type: "redirect",
-        interactive: true,
-        expiration: "never",
-        persist: true,
-        success: () ->
-          service.token = Trello.token();
-          $rootScope.$broadcast('trello.authorized');
-        scope: { write: false, read: true }
-      });
+      if Trello.authorized()
+        $rootScope.$broadcast('trello.update');
+      else
+        Trello.authorize({
+          type: "popup",
+          success: () ->
+            service.token = Trello.token();
+            $rootScope.$broadcast('trello.update');
+          scope: { write: false, read: true }
+        });
     getLists: (board) ->
       Trello.get('/boards/' + board.id + '/lists',
         (data) ->
