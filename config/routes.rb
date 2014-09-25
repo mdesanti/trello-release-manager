@@ -5,12 +5,12 @@ Trellorelease::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  resources :trello_releases, only: [:create, :show]
   resources :trello_releases do
-    member do
-      get :find
+    collection do
+      get :for_board
     end
   end
+  resources :trello_releases, only: [:create, :show]
 
   post "send_email" => "emails#send_email", as: 'email_send'
 

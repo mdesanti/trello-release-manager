@@ -1,0 +1,5 @@
+div ng-controller="ListReleasesCtrl"
+  .bs-callout.bs-callout-danger.cod-md-4 ng-repeat="release in boardReleases"
+    a href="/release/{{release.id}}"
+      h4 = "{{release.created_at | date: 'short'}}"
+

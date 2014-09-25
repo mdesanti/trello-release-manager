@@ -26,6 +26,9 @@ angular
           })
           .when('/board/:boardId/selectList', {
             templateUrl: 'new_release.html'
+          })
+          .when('/board/:boardId/releases', {
+            templateUrl: 'list_releases.html'
           });
         $locationProvider.html5Mode(true);
     ]);

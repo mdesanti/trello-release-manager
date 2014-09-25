@@ -1,6 +1,7 @@
 angular.module('TrelloRelease').service( 'ReleaseService', [ '$rootScope', 'Restangular', ($rootScope, Restangular) ->
   service = {
     release: '',
+    boardReleases: [];
     newRelease: (release) ->
       base = Restangular.all('trello_releases.json')
       base.post({trello_release: release}).then(
@@ -15,6 +16,15 @@ angular.module('TrelloRelease').service( 'ReleaseService', [ '$rootScope', 'Rest
         (response) ->
           service.release = angular.fromJson(response.trello_release)
           $rootScope.$broadcast('release.update');
+        () ->
+          console.log 'Failure'
+      )
+    getReleaseForBoard: (board) ->
+      release = Restangular.one('trello_releases/for_board.json')
+      release.get({board_id: board.id}).then(
+        (response) ->
+          service.boardReleases = angular.fromJson(response.trello_releases)
+          $rootScope.$broadcast('boardReleases.update');
         () ->
           console.log 'Failure'
       )

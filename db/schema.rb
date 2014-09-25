@@ -15,8 +15,6 @@ ActiveRecord::Schema.define(version: 20140924193025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "uuid-ossp"
 
   create_table "trello_cards", force: true do |t|
     t.integer  "card_number"

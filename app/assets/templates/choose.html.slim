@@ -3,7 +3,7 @@ div ng-controller="HomeCtrl"
     .col-md-12
       h1 = "{{selectedBoard.name}}"
     .col-md-6#left
-      a href="#"
+      a href="/board/{{selectedBoard.id}}/releases"
         h1 = "View releases"
     .col-md-6#right
       a href="/board/{{selectedBoard.id}}/selectList"

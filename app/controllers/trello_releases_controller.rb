@@ -15,8 +15,9 @@ class TrelloReleasesController < InheritedResources::Base
     end
   end
 
-  def find
-
+  def for_board
+    releases = TrelloRelease.where(board: params[:board_id]).order('created_at DESC')
+    render json: { trello_releases: releases.to_json }, status: 200
   end
 
   private
