@@ -15,6 +15,14 @@ angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', '$loca
         (data) ->
           console.log('Failure');
       )
+    getBoard: (boardId) ->
+      route = '/board/' + boardId
+      Trello.get(route,
+        (data) ->
+          $rootScope.$broadcast('board.get', data);
+        (data) ->
+          console.log 'Failure'
+      )
     authorize: () ->
       if Trello.authorized()
         $rootScope.$broadcast('trello.update');
