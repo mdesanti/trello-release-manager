@@ -1,5 +1,9 @@
 div ng-controller="ReleaseCtrl"
   .container
+    a.btn.btn-primary.pull-right href="/release/{{info.trello_release}}/tagGithubRelease" target="_blank"
+      = "Tag Github Release"
+    br
+    br
     .row
       form#form accept-charset="UTF-8" ng-submit="submit()" name="form"
         input ng-model="info.trello_release" class="ng-hide" type="text"

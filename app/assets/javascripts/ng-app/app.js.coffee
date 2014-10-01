@@ -22,6 +22,9 @@ angular
       .when('/release/:releaseId', {
         templateUrl: 'release.html'
       })
+      .when('/release/:releaseId/tagGithubRelease', {
+        templateUrl: 'tag_github_release.html'
+      })
       .when('/choose', {
         templateUrl: 'choose.html'
       })
@@ -32,7 +35,7 @@ angular
         templateUrl: 'list_releases.html'
       });
     $locationProvider.html5Mode(true);
-  ]).run(['$rootScope', '$location', ($rootScope, $location) ->
-    if !Trello.authorized() && $location.path() != '/'
-      $location.path('/')
+  ]).run(['$rootScope', '$location', 'TrelloService', ($rootScope, $location, TrelloService) ->
+    if !Trello.authorized()
+      TrelloService.authorize()
   ]);
