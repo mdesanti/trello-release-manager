@@ -6,7 +6,9 @@
       "angular-route": "latest",
       "restangular": "latest",
       "angular-sanitize": "latest",
-      "angular-simple-format": "latest"
+      "angular-simple-format": "latest",
+      "oauth-js": "latest",
+      "octokit": "latest"
     }
   },
   "vendor": {

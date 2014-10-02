@@ -1,2 +1,9 @@
 div ng-controller="TagGithubRelaseCtrl"
+  a href='#' ng-click="login()"
+    = "Login!"
+
+  .col-md-4.col-md-offset-4
+      h3 = "Select a Repo to continue"
+      ul.list-group
+        a href="#" class="list-group-item" ng-repeat="repo in repos track by $id(repo)" ng-click="getCommits(repo)" {{repo.name}}
 

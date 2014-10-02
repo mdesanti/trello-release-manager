@@ -25,6 +25,9 @@ angular
       .when('/release/:releaseId/tagGithubRelease', {
         templateUrl: 'tag_github_release.html'
       })
+      .when('/github/auth', {
+        templateUrl: 'tag_github_release.html'
+      })
       .when('/choose', {
         templateUrl: 'choose.html'
       })
@@ -36,6 +39,9 @@ angular
       });
     $locationProvider.html5Mode(true);
   ]).run(['$rootScope', '$location', 'TrelloService', ($rootScope, $location, TrelloService) ->
+
+    OAuth.initialize('WTEI9Z8BjVIxkR-kolxLNwn_GO8');
+
     if !Trello.authorized()
       TrelloService.authorize()
   ]);
