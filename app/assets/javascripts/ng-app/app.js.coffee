@@ -4,7 +4,8 @@ angular
       'templates',
       'restangular',
       'ngSanitize',
-      'simpleFormat'
+      'simpleFormat',
+      'truncate'
   ]).config(['$routeProvider', '$locationProvider', 'RestangularProvider', ($routeProvider, $locationProvider, RestangularProvider) ->
     RestangularProvider.setBaseUrl('/');
 
@@ -38,6 +39,10 @@ angular
         templateUrl: 'list_releases.html'
       });
     $locationProvider.html5Mode(true);
+  ]).factory('GitHubRestangular', ['Restangular', (Restangular) ->
+    return Restangular.withConfig (RestangularConfigurer) ->
+      RestangularConfigurer.setBaseUrl('https://api.github.com/')
+
   ]).run(['$rootScope', '$location', 'TrelloService', ($rootScope, $location, TrelloService) ->
 
     OAuth.initialize('WTEI9Z8BjVIxkR-kolxLNwn_GO8');

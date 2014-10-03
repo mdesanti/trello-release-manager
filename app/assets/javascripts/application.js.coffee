@@ -22,6 +22,7 @@
 # //= require angular-simple-format
 # //= require oauth-js
 # //= require octokit
+# //= require angular-truncate
 # //= require_tree ../templates
 # //= require loadjs
 # //= require_tree .
