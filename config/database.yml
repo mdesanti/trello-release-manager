@@ -65,11 +65,8 @@ staging:
 production:
   adapter: postgresql
   encoding: unicode
-  database: trellorelease_development
   pool: 5
-  username: trellorelease
-  password: trellorelease
-  host: localhost
+  url: <%= ENV['DATABASE_URL'] %>
 
 cucumber:
   <<: *test
