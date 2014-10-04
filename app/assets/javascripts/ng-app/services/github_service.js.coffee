@@ -17,7 +17,7 @@ angular.module('TrelloRelease').service('GithubService', ['$rootScope', '$locati
         )
         .fail((error) ->
             # Handle errors
-            console.log 'Fail :('
+            console.log error
         )
     loadUserRepos: (callback) ->
       service.github.getUser().orgRepos('Wolox',
