@@ -10,7 +10,7 @@
   "_resolution": {
     "type": "version",
     "tag": "v1.2.26",
-    "commit": "9f561fc90520d4f1141f8d33cbb83c2c8fad9f4e"
+    "commit": "738348ea8ec9e1153f938fff1427129cd76d6007"
   },
   "_source": "git://github.com/angular/bower-angular-sanitize.git",
   "_target": "*",

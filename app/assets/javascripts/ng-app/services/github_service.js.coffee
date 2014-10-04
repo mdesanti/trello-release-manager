@@ -9,9 +9,10 @@ angular.module('TrelloRelease').service( 'GithubService', [ '$rootScope', '$loca
         .done((result) ->
             # Perform API calls
             service.access_token = result.access_token
-            service.github = new Octokit({
-              token: service.access_token
-            })
+            service.github = new Github({
+              token: service.access_token,
+              auth: "oauth"
+            });
             callback()
         )
         .fail((error) ->
@@ -19,13 +20,13 @@ angular.module('TrelloRelease').service( 'GithubService', [ '$rootScope', '$loca
             console.log 'Fail :('
         )
     loadUserRepos: () ->
-      service.github.getOrgRepos('Wolox').then(
-        (response) ->
+      service.github.getUser().orgRepos('Wolox',
+        (err, response) ->
           service.repos = response
           $rootScope.$broadcast('repos.update');
       )
     getCommits: (repo) ->
-      service.github.getRepo('Wolox', repo.name).getCommits({}).then((commits) ->
+      service.github.getRepo('Wolox', repo.name).getCommits({},(commits) ->
         console.log commits
       )
   }
