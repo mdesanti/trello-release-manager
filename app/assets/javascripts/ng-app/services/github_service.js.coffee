@@ -25,7 +25,7 @@ angular.module('TrelloRelease').service('GithubService', ['$rootScope', '$locati
           callback(response)
       )
     getCommits: (repo, callback) ->
-      service.github.getRepo('Wolox', repo.name).getCommits({}, (err, commits) ->
+      service.github.getRepo('Wolox', repo.name).getCommits({sha: 'production'}, (err, commits) ->
         callback(err, commits)
       )
     tagRelease: (repo, data, callback) ->
