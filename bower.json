@@ -8,7 +8,6 @@
       "angular-sanitize": "latest",
       "angular-simple-format": "latest",
       "oauth-js": "latest",
-      "octokit": "latest",
       "angular-truncate": "latest"
     }
   },
