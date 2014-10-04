@@ -9,21 +9,33 @@ div ng-controller="TagGithubRelaseCtrl"
           = " | Sign In with Github"
   div ng-show="releaseTagged == false && loggedIn"
     .row
-      .col-md-3
-          h3 = "Select a Repo to continue"
-          ui-select ng-model="repo.selected" on-select="getCommits($item)"
-            ui-select-match placeholder="Choose a repo..."
-              = "{{$select.selected.name}}"
-            ui-select-choices repeat="repo in repos | filter: { name: $select.search }"
-              div ng-bind-html="repo.name | highlight: $select.search"
-              = "{{repo.name}}"
+      .col-md-7
+        .row
+          .col-md-6 ng-show="step >= 1"
+            h3 = "Select a Repo to continue"
+            ui-select ng-model="repo.selected" on-select="getBranches($item)"
+              ui-select-match placeholder="Choose a repo..."
+                = "{{$select.selected.name}}"
+              ui-select-choices repeat="repo in repos | filter: { name: $select.search }"
+                h4 ng-bind-html="repo.name | highlight: $select.search"
+                = "{{repo.full_name}}"
 
-      .col-md-3.col-md-offset-1
-          h3 = "Select a Commit to continue"
-          ul.list-group
-            a href="#" class="list-group-item" ng-repeat="commit in commits track by commit.sha" ng-click="selectCommit(commit)"
-              h4 = "{{commit.commit.message | words:7}}"
-              p = "{{commit.author.login}}"
+          .col-md-6 ng-show="step >= 2"
+              h3 = "Select a branch"
+              ui-select ng-model="branch.selected" on-select="getCommits(selectedRepo, $item)"
+                ui-select-match placeholder="Choose a branch..."
+                  = "{{$select.selected}}"
+                ui-select-choices repeat="branch in branches | filter:$select.search"
+                  h4 ng-bind-html="branch | highlight: $select.search"
+        .row
+          .col-md-12 ng-show="step >= 3"
+              h3 = "Select a Commit to continue"
+              .commit.col-md-4 ng-repeat="commit in commits track by commit.sha" ng-click="selectCommit(commit)"
+                .panel.panel-warning
+                  .panel-heading.clearfix
+                    h3.panel-title.pull-left = "{{commit.commit.message | words:7}}"
+                  .panel-body
+                    = "{{commit.author.login}}"
 
       .col-md-5 ng-show="selectedRepo && selectedCommit"
         h3 = "Input info for release tag"
@@ -53,6 +65,7 @@ div ng-controller="TagGithubRelaseCtrl"
                     = " - "
                     span= "{{card.card_name}}"
             input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
+
   div ng-show="releaseTagged && loggedIn"
     h4 = "Release has been created!"
     p
