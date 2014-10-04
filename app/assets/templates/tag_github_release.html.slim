@@ -1,47 +1,53 @@
 div ng-controller="TagGithubRelaseCtrl"
-  .row
-    .col-md-12
-      a.pull-right.btn.btn-success href='#' ng-click="login()"
-        = "Login!"
-  .row
-    .col-md-3
-        h3 = "Select a Repo to continue"
-        ul.list-group
-          a href="#" class="list-group-item" ng-repeat="repo in repos track by $id(repo)" ng-click="getCommits(repo)" {{repo.name}}
+  div ng-show="releaseTagged == false"
+    .row
+      .col-md-12
+        a.pull-right.btn.btn-success href='#' ng-click="login()"
+          = "Login!"
+    .row
+      .col-md-3
+          h3 = "Select a Repo to continue"
+          ul.list-group
+            a href="#" class="list-group-item" ng-repeat="repo in repos track by $id(repo)" ng-click="getCommits(repo)" {{repo.name}}
 
-    .col-md-3.col-md-offset-1
-        h3 = "Select a Commit to continue"
-        ul.list-group
-          a href="#" class="list-group-item" ng-repeat="commit in commits track by commit.sha" ng-click="selectCommit(commit)"
-            h4 = "{{commit.commit.message | words:7}}"
-            p = "{{commit.author.login}}"
+      .col-md-3.col-md-offset-1
+          h3 = "Select a Commit to continue"
+          ul.list-group
+            a href="#" class="list-group-item" ng-repeat="commit in commits track by commit.sha" ng-click="selectCommit(commit)"
+              h4 = "{{commit.commit.message | words:7}}"
+              p = "{{commit.author.login}}"
 
-    .col-md-5 ng-show="selectedRepo && selectedCommit"
-      h3 = "Input info for release tag"
-      form#form accept-charset="UTF-8" ng-submit="tagRelease()" name="form"
-        .col-md-12
-          .row
-            .col-md-10
-              .input-group
-                span.input-group-addon
-                  = "Tag name"
-                input.form-control ng-model="data.tag_name" type="text" required="required"
-          br
-          .row
-            .col-md-10
-              .input-group
-                span.input-group-addon
-                  = "Release name"
-                input.form-control ng-model="data.name" type="text"
-          br
-          .row
-            .well
-              p ng-bind-html="info.intro|simpleFormat"
-              ul
-                li ng-repeat="card in release.trello_cards"
-                  a href="{{card.card_link}}" target="_blank"
-                    = "{{card.card_number}}"
-                  = " - "
-                  span= "{{card.card_name}}"
-          input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
+      .col-md-5 ng-show="selectedRepo && selectedCommit"
+        h3 = "Input info for release tag"
+        form#form accept-charset="UTF-8" ng-submit="tagRelease()" name="form"
+          .col-md-12
+            .row
+              .col-md-10
+                .input-group
+                  span.input-group-addon
+                    = "Tag name"
+                  input.form-control ng-model="data.tag_name" type="text" required="required"
+            br
+            .row
+              .col-md-10
+                .input-group
+                  span.input-group-addon
+                    = "Release name"
+                  input.form-control ng-model="data.name" type="text"
+            br
+            .row
+              .well
+                p ng-bind-html="info.intro|simpleFormat"
+                ul
+                  li ng-repeat="card in release.trello_cards"
+                    a href="{{card.card_link}}" target="_blank"
+                      = "{{card.card_number}}"
+                    = " - "
+                    span= "{{card.card_name}}"
+            input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
+  div ng-show="releaseTagged"
+    h4 = "Release has been created!"
+    p
+      a href="{{githubRelease.html_url}}"
+        = "View release in Github"
 

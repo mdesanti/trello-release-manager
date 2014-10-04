@@ -4,6 +4,7 @@ angular.module('TrelloRelease')
     $scope.data = {}
     $scope.data.body = ''
     $scope.data.draft = false
+    $scope.releaseTagged = false
 
     $scope.$on('release.update', (event) ->
       $scope.release = ReleaseService.release
@@ -27,9 +28,8 @@ angular.module('TrelloRelease')
       )
 
     $scope.getCommits = (repo) ->
-      GithubService.getReleases(repo)
       $scope.selectedRepo = repo
-      GithubService.getCommits(repo, (commits) ->
+      GithubService.getCommits(repo, (err, commits) ->
         $scope.commits = commits
         $scope.$apply()
       )
@@ -46,5 +46,10 @@ angular.module('TrelloRelease')
       $scope.data.body = body
 
     $scope.tagRelease = () ->
-      GithubService.tagRelease($scope.selectedRepo, $scope.data)
+      GithubService.tagRelease($scope.selectedRepo, $scope.data, onReleaseTagged)
+
+    onReleaseTagged = (response) ->
+      $scope.releaseTagged = true
+      $scope.githubRelease = response
+      console.log response
   ]);

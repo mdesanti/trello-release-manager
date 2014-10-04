@@ -25,23 +25,15 @@ angular.module('TrelloRelease').service('GithubService', ['$rootScope', '$locati
           callback(response)
       )
     getCommits: (repo, callback) ->
-      service.github.getRepo('Wolox', repo.name).getCommits({},(commits) ->
-        callback(commits)
+      service.github.getRepo('Wolox', repo.name).getCommits({}, (err, commits) ->
+        callback(err, commits)
       )
-    tagRelease: (repo, data) ->
+    tagRelease: (repo, data, callback) ->
       $http.defaults.headers.common.Authorization = 'token ' + service.access_token
       GitHubRestangular.all('repos/Wolox/' + repo.name + '/releases').post(data)
         .then(
           (response) ->
-            console.log response.getList()
-        )
-
-    getReleases: (repo) ->
-      $http.defaults.headers.common.Authorization = 'token ' + service.access_token
-      GitHubRestangular.all('repos/Wolox/' + repo.name + '/releases').getList()
-        .then(
-          (response) ->
-            console.log response.getList()
+            callback(response)
         )
 
   }
