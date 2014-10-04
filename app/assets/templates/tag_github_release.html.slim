@@ -38,33 +38,36 @@ div ng-controller="TagGithubRelaseCtrl"
                     = "{{commit.author.login}}"
 
       .col-md-5 ng-show="selectedRepo && selectedCommit"
-        h3 = "Input info for release tag"
-        form#form accept-charset="UTF-8" ng-submit="tagRelease()" name="form"
-          .col-md-12
-            .row
-              .col-md-10
-                .input-group
-                  span.input-group-addon
-                    = "Tag name"
-                  input.form-control ng-model="data.tag_name" type="text" required="required"
-            br
-            .row
-              .col-md-10
-                .input-group
-                  span.input-group-addon
-                    = "Release name"
-                  input.form-control ng-model="data.name" type="text"
-            br
-            .row
-              .well
-                p ng-bind-html="info.intro|simpleFormat"
-                ul
-                  li ng-repeat="card in release.trello_cards"
-                    a href="{{card.card_link}}" target="_blank"
-                      = "{{card.card_number}}"
-                    = " - "
-                    span= "{{card.card_name}}"
-            input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
+        .row
+          form#form accept-charset="UTF-8" ng-submit="tagRelease()" name="form"
+            .col-md-12
+              h3 = "Input info for release tag"
+              h4 = "Commit: {{selectedCommit.commit.message | words:7}}"
+              .row
+                .col-md-10
+                  .input-group
+                    span.input-group-addon
+                      = "Tag name"
+                    input.form-control ng-model="data.tag_name" type="text" required="required"
+              br
+              .row
+                .col-md-10
+                  .input-group
+                    span.input-group-addon
+                      = "Release name"
+                    input.form-control ng-model="data.name" type="text"
+              br
+              .row
+                .col-md-12
+                  .well
+                    p ng-bind-html="info.intro|simpleFormat"
+                    ul
+                      li ng-repeat="card in release.trello_cards"
+                        a href="{{card.card_link}}" target="_blank"
+                          = "{{card.card_number}}"
+                        = " - "
+                        span= "{{card.card_name}}"
+              input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
 
   div ng-show="releaseTagged && loggedIn"
     h4 = "Release has been created!"
