@@ -5,6 +5,7 @@ angular.module('TrelloRelease')
     $scope.data.body = ''
     $scope.data.draft = false
     $scope.releaseTagged = false
+    $scope.loggedIn = false
 
     $scope.$on('release.update', (event) ->
       $scope.release = ReleaseService.release
@@ -15,10 +16,13 @@ angular.module('TrelloRelease')
     $scope.login = () ->
       GithubService.login(() ->
         GithubService.loadUserRepos(onReposLoaded)
+        $scope.loggedIn = true
+        $scope.$apply()
       )
 
     onReposLoaded = (repos) ->
       $scope.repos = repos
+      console.log repos
       $scope.$apply()
 
     $scope.getBranches = (repo) ->
@@ -28,6 +32,7 @@ angular.module('TrelloRelease')
       )
 
     $scope.getCommits = (repo) ->
+      console.log repo
       $scope.selectedRepo = repo
       GithubService.getCommits(repo, (err, commits) ->
         $scope.commits = commits

@@ -1,14 +1,22 @@
 div ng-controller="TagGithubRelaseCtrl"
-  div ng-show="releaseTagged == false"
+  div ng-show="loggedIn == false"
     .row
-      .col-md-12
-        a.pull-right.btn.btn-success href='#' ng-click="login()"
-          = "Login!"
+      .col-md-4
+        = image_tag 'octocat.jpg', class: 'octocat'
+      .col-md-8.text-center
+        a.btn.btn-lg.btn-github#github-button href='#' ng-click="login()"
+          i.fa.fa-github
+          = " | Sign In with Github"
+  div ng-show="releaseTagged == false && loggedIn"
     .row
       .col-md-3
           h3 = "Select a Repo to continue"
-          ul.list-group
-            a href="#" class="list-group-item" ng-repeat="repo in repos track by $id(repo)" ng-click="getCommits(repo)" {{repo.name}}
+          ui-select ng-model="repo.selected" on-select="getCommits($item)"
+            ui-select-match placeholder="Choose a repo..."
+              = "{{$select.selected.name}}"
+            ui-select-choices repeat="repo in repos | filter: { name: $select.search }"
+              div ng-bind-html="repo.name | highlight: $select.search"
+              = "{{repo.name}}"
 
       .col-md-3.col-md-offset-1
           h3 = "Select a Commit to continue"
@@ -45,7 +53,7 @@ div ng-controller="TagGithubRelaseCtrl"
                     = " - "
                     span= "{{card.card_name}}"
             input.btn.btn-warning name="commit" type="submit" value=("Tag Release")
-  div ng-show="releaseTagged"
+  div ng-show="releaseTagged && loggedIn"
     h4 = "Release has been created!"
     p
       a href="{{githubRelease.html_url}}"

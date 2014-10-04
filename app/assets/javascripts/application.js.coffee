@@ -25,5 +25,6 @@
 # //= require trello
 # //= require oauth-js
 # //= require angular-truncate
+# //= require select.min
 # //= require_tree ../templates
 # //= require_tree .

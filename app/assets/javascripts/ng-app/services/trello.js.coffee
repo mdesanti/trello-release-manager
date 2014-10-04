@@ -23,7 +23,7 @@ angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', '$loca
         (data) ->
           console.log 'Failure'
       )
-    authorize: () ->
+    authorize: (callback) ->
       if Trello.authorized()
         $rootScope.$broadcast('trello.update');
       else
@@ -32,6 +32,7 @@ angular.module('TrelloRelease').service( 'TrelloService', [ '$rootScope', '$loca
           success: () ->
             service.token = Trello.token();
             $rootScope.$broadcast('trello.update');
+            callback()
           scope: { write: false, read: true }
         });
     getLists: (board) ->

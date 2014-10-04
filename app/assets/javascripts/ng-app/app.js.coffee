@@ -5,9 +5,11 @@ angular
       'restangular',
       'ngSanitize',
       'simpleFormat',
-      'truncate'
-  ]).config(['$routeProvider', '$locationProvider', 'RestangularProvider', ($routeProvider, $locationProvider, RestangularProvider) ->
+      'truncate',
+      'ui.select'
+  ]).config(['$routeProvider', '$locationProvider', 'RestangularProvider', 'uiSelectConfig', ($routeProvider, $locationProvider, RestangularProvider, uiSelectConfig) ->
     RestangularProvider.setBaseUrl('/');
+    uiSelectConfig.theme = 'bootstrap';
 
     $routeProvider
       .when('/', {
@@ -48,5 +50,8 @@ angular
     OAuth.initialize('WTEI9Z8BjVIxkR-kolxLNwn_GO8');
 
     if !Trello.authorized()
-      TrelloService.authorize()
+      TrelloService.authorize(() ->
+        if $location.path() == '/'
+          $location.path('/boards')
+      )
   ]);

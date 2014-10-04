@@ -4,6 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require bootstrap_and_overrides
+ *= require select.min
  *= require_tree .
 */
 
@@ -36,4 +37,12 @@ border-color: #f0ad4e;
 .bs-callout-info {
 background-color: #f0f7fd;
 border-color: #5bc0de;
+}
+
+.octocat {
+  width: 550px;
+}
+
+#github-button {
+  margin-top: 200px;
 }
